@@ -76,11 +76,11 @@ public class Transform
     /// <summary>
     /// Converts the rotation float to degrees.
     /// </summary>
-    public float RotationToDegrees() => MathHelper.ToDegrees(Rotation);
+    public float GetRotationInDegrees() => MathHelper.ToDegrees(Rotation);
 
     /// <summary>
     /// Converts the rotation float to radians.
     /// </summary>
-    public float RotationToRadians() => MathHelper.ToRadians(Rotation);
+    public float GetRotationInRadians() => MathHelper.ToRadians(Rotation);
     #endregion
 }

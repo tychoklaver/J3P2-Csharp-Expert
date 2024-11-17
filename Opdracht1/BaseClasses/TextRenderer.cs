@@ -47,10 +47,7 @@ public class TextRenderer
             return;
 
         Vector2 textSize = _font.MeasureString(_text);
-        Vector2 drawPosition = new(
-            Parent.Transform.Position.X + _offset.X - (textSize.X / 2),
-            Parent.Transform.Position.Y + _offset.Y - (textSize.Y / 2)
-        );
+        Vector2 drawPosition = Parent.Transform.Position + _offset - (textSize / 2);
 
         pSpriteBatch.DrawString(
             _font,
@@ -59,6 +56,16 @@ public class TextRenderer
             _color);
     }
 
-    public void UpdateText(string pText) => _text = pText;
+    /// <summary>
+    /// Updates the text.
+    /// </summary>
+    /// <param name="pText">The new text.</param>
+    /// <exception cref="ArgumentNullException">Thrown when pText <paramref name="pText"/> is null.</exception>
+    public void UpdateText(string pText)
+    {
+        if (string.IsNullOrEmpty(_text)) throw new ArgumentNullException(nameof(pText), "Text cannot be null or empty.");
+        _text = pText;
+    } 
+
     #endregion
 }

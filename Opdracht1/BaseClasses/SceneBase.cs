@@ -6,7 +6,6 @@
 /// </summary>
 public abstract class SceneBase
 {
-    #region Public Voids
     /// <summary>
     /// Updates the scene Logic. Derived classes must implement the Update void.
     /// </summary>
@@ -18,5 +17,4 @@ public abstract class SceneBase
     /// </summary>
     /// <param name="pSpriteBatch">The SpriteBatch used for drawing.</param>
     public abstract void Draw(SpriteBatch pSpriteBatch);
-    #endregion
 }

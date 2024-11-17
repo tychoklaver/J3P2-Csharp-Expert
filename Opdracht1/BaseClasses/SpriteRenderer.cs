@@ -47,12 +47,13 @@ public class SpriteRenderer
     public void Draw(SpriteBatch pSpriteBatch, Transform pTransform)
     {
         if (Texture == null) return;
+
         pSpriteBatch.Draw(
             Texture,
             pTransform.Position,
             null,
             Color.White,
-            pTransform.RotationToRadians(), // Translates the Degrees to Radians, for correct rotation.
+            pTransform.GetRotationInRadians(), // Translates the Degrees to Radians, for correct rotation.
             pTransform.Origin * _textureSize, // Sets the Origin of the object to the centre of the sprite.
             pTransform.Scale,
             SpriteEffects.None,

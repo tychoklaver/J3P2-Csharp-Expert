@@ -75,6 +75,7 @@ public class GameObject
     /// <param name="pTextRenderer">The TextRenderer to add to the list.</param>
     public void AddTextRenderer(TextRenderer pTextRenderer)
     {
+        if (pTextRenderer == null) throw new ArgumentNullException(nameof(pTextRenderer));
         pTextRenderer.Parent = this;
         TextRenderers.Add(pTextRenderer);
     }
@@ -85,6 +86,8 @@ public class GameObject
     /// <param name="pTextRenderers">The list of Renderers to add.</param>
     public void AddTextRenderer(params TextRenderer[] pTextRenderers)
     {
+        if (pTextRenderers == null) throw new ArgumentNullException(nameof (pTextRenderers));
+
         foreach (TextRenderer renderer in pTextRenderers)
         {
             renderer.Parent = this;
@@ -98,6 +101,8 @@ public class GameObject
     /// <param name="pTextRenderer">The TextRenderer to remove.</param>
     public void RemoveTextRenderer(TextRenderer pTextRenderer)
     {
+        if (pTextRenderer == null) throw new ArgumentNullException (nameof(pTextRenderer));
+
         if (!TextRenderers.Contains(pTextRenderer))
             return;
         
