@@ -81,7 +81,7 @@ public class GameObject
     /// Allows multiple text renderers to be added at once, instead of only one.
     /// </summary>
     /// <param name="pTextRenderers">The list of Renderers to add.</param>
-    public void AddTextRenderer(List<TextRenderer> pTextRenderers)
+    public void AddTextRenderer(params TextRenderer[] pTextRenderers)
     {
         foreach (TextRenderer renderer in pTextRenderers)
         {

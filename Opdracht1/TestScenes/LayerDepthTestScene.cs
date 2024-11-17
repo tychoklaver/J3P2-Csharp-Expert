@@ -57,7 +57,7 @@ public class LayerDepthTestScene : SceneBase
             new TextRenderer(pFont, "Use Left/Right to switch objects!", new Vector2(0, 60), Color.White)
         };
 
-        _textObject.AddTextRenderer(textRenderers);
+        _textObject.AddTextRenderer(textRenderers.ToArray());
 
         _currentObjectIndex = 0;
         _previousKeyboardState = Keyboard.GetState();

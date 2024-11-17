@@ -38,7 +38,7 @@ public class RotationTestScene : SceneBase
             new TextRenderer(pFont, "Use the Arrow Keys to switch between object!", new Vector2(0, 40), Color.White)
         };
 
-        _textObject.AddTextRenderer(renderers);
+        _textObject.AddTextRenderer(renderers.ToArray());
 
         _currentObjectIndex = 0;
         _previousKeyboardState = Keyboard.GetState();
