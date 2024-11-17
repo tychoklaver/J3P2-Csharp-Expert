@@ -27,20 +27,22 @@ public class GameObject
     /// Initializes a new default GameObject instance.
     /// </summary>
     /// <param name="pTexture">The texture to render.</param>
+    /// <param name="pPosition">The position of the object.</param>
     /// <param name="pLayerDepth">The layer depth of the GameObject, where the default is 0.</param>
-    public GameObject(Texture2D pTexture, float pLayerDepth = 0f)
+    public GameObject(Texture2D pTexture, Vector2 pPosition, float pLayerDepth = 0f)
     {
-        Transform = new Transform();
+        Transform = new Transform(pPosition);
         SpriteRenderer = new SpriteRenderer(pTexture, pLayerDepth);
         TextRenderers = new List<TextRenderer>();
     }
 
     /// <summary>
-    /// Initializes a new GameObject instanc without a SpriteRenderer instance.
+    /// Initializes a new GameObject instance without a SpriteRenderer instance.
     /// </summary>
-    public GameObject()
+    /// <param name="pPosition">The position of the object.</param>
+    public GameObject(Vector2 pPosition)
     {
-        Transform = new Transform();
+        Transform = new Transform(pPosition);
         SpriteRenderer = null;
         TextRenderers = new List<TextRenderer>();
     }

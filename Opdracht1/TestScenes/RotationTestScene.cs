@@ -26,10 +26,7 @@ public class RotationTestScene : SceneBase
         InitializeGameObject(pTexture, 180f, pFont, 2);
         InitializeGameObject(pTexture, 270f, pFont, 3);
 
-        _textObject = new GameObject()
-        {
-            Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 20) }
-        };
+        _textObject = new GameObject(new Vector2(Game1.ScreenWidth / 2, 20));
 
         List<TextRenderer> renderers = new List<TextRenderer>()
         {
@@ -69,8 +66,7 @@ public class RotationTestScene : SceneBase
     #region Private Voids
     private void InitializeGameObject(Texture2D pTexture, float pRotation, SpriteFont pFont, int pIndex)
     {
-        _gameObjects[pIndex] = new GameObject(pTexture);
-        _gameObjects[pIndex].Transform.Position = new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2);
+        _gameObjects[pIndex] = new GameObject(pTexture, new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2));
         _gameObjects[pIndex].Transform.UpdateRotation(pRotation);
         _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Rotation}", new Vector2(50, -50), Color.White));
     }

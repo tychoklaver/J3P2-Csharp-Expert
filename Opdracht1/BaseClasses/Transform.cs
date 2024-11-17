@@ -9,7 +9,7 @@ public class Transform
     /// <summary>
     /// Gets or sets the position of the object.
     /// </summary>
-    public Vector2 Position { get; set; }
+    public Vector2 Position { get; private set; }
 
     /// <summary>
     /// Gets or sets the rotation of the object.
@@ -38,9 +38,23 @@ public class Transform
         Scale = Vector2.One;
         Origin = new Vector2(0.5f, 0.5f); // Sets Origin to half the size of the Texture. Further logic handled in SpriteRenderer.
     }
+
+    public Transform(Vector2 pPosition)
+    {
+        Position = pPosition;
+        Rotation = 0f;
+        Scale = Vector2.One;
+        Origin = new Vector2(0.5f, 0.5f);
+    }
     #endregion
 
     #region Public Voids
+    /// <summary>
+    /// Updates the position of the GameObject.
+    /// </summary>
+    /// <param name="pPosition">The new position.</param>
+    public void UpdatePosition(Vector2 pPosition) => Position = pPosition;
+
     /// <summary>
     /// Updates the rotation of the GameObject.
     /// </summary>

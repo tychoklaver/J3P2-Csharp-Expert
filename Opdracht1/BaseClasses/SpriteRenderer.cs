@@ -18,7 +18,7 @@ public class SpriteRenderer
     /// <summary>
     /// The Layer Depth of the object to be drawn to the screen.
     /// </summary>
-    public float LayerDepth { get; set; }
+    public float LayerDepth { get; private set; }
     #endregion
 
     #region Constructors
@@ -58,5 +58,11 @@ public class SpriteRenderer
             SpriteEffects.None,
             LayerDepth);
     }
+
+    /// <summary>
+    /// Updates the object's layer depth.
+    /// </summary>
+    /// <param name="pLayerDepth">The new Layer Depth.</param>
+    public void UpdateLayerDepth(float pLayerDepth) => LayerDepth = pLayerDepth;
     #endregion
 }

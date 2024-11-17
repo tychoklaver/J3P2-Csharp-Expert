@@ -27,10 +27,7 @@ public class ScaleTestScene : SceneBase
         InitializeGameObject(pTexture, new Vector2(1.3f, 1.3f), pFont, 3);
         InitializeGameObject(pTexture, new Vector2(3.0f, 1.4f), pFont, 4);
 
-        _textObject = new GameObject()
-        {
-            Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 20) }
-        };
+        _textObject = new GameObject(new Vector2(Game1.ScreenWidth / 2, 20));
 
         List<TextRenderer> renderers = new List<TextRenderer>()
         {
@@ -70,8 +67,7 @@ public class ScaleTestScene : SceneBase
     #region Private Voids
     private void InitializeGameObject(Texture2D pTexture, Vector2 pScale, SpriteFont pFont, int pIndex)
     {
-        _gameObjects[pIndex] = new GameObject(pTexture);
-        _gameObjects[pIndex].Transform.Position = new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2);
+        _gameObjects[pIndex] = new GameObject(pTexture, new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2));
         _gameObjects[pIndex].Transform.UpdateScale(pScale);
         _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Scale}", new Vector2(50, -50), Color.White));
     }

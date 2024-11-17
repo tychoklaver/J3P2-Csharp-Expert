@@ -27,10 +27,7 @@ public class PositionTestScene : SceneBase
         InitializeGameObject(pTexture, new Vector2(400, 400), pFont, 3);
         InitializeGameObject(pTexture, new Vector2(80, 310), pFont, 4);
 
-        _textObject = new GameObject()
-        {
-            Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 20) }
-        };
+        _textObject = new GameObject(new Vector2(Game1.ScreenWidth / 2, 20));
 
         List<TextRenderer> renderers = new List<TextRenderer>()
         {
@@ -70,8 +67,7 @@ public class PositionTestScene : SceneBase
     #region Private Voids
     private void InitializeGameObject(Texture2D pTexture, Vector2 pPosition, SpriteFont pFont, int pIndex)
     {
-        _gameObjects[pIndex] = new GameObject(pTexture);
-        _gameObjects[pIndex].Transform.Position = pPosition;
+        _gameObjects[pIndex] = new GameObject(pTexture, pPosition);
         _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Position}", new Vector2(50, -50), Color.White));
     }
 

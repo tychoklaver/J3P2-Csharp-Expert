@@ -23,20 +23,9 @@ public class LayerDepthTestScene : SceneBase
     {
         _gameObjects = new List<GameObject>()
         {
-            new GameObject(pTexture, 0.9f)
-            {
-                Transform = { Position = new Vector2(300, 300) }
-            },
-
-            new GameObject(pTexture, 0.3f)
-            {
-                Transform = { Position = new Vector2(350, 350) }
-            },
-
-            new GameObject(pTexture, 0.5f)
-            {
-                Transform = { Position = new Vector2(400, 400) }
-            }
+            new GameObject(pTexture, new Vector2(300, 300), 0.9f),
+            new GameObject(pTexture, new Vector2(350, 350), 0.3f),
+            new GameObject(pTexture, new Vector2(400, 400), 0.5f)
         };
 
         foreach (GameObject obj in  _gameObjects)
@@ -44,10 +33,7 @@ public class LayerDepthTestScene : SceneBase
             obj.AddTextRenderer(new TextRenderer(pFont, $"Layer Depth: {obj.SpriteRenderer.LayerDepth}", new Vector2(20, -40), Color.White));
         }
 
-        _textObject = new GameObject()
-        {
-            Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 20) }
-        };
+        _textObject = new GameObject(new Vector2(Game1.ScreenWidth / 2, 20));
 
         List<TextRenderer> textRenderers = new List<TextRenderer>()
         {
@@ -110,13 +96,13 @@ public class LayerDepthTestScene : SceneBase
         if (pCurrentKeyboardState.IsKeyDown(Keys.Up) && !_previousKeyboardState.IsKeyDown(Keys.Up))
         {
             GameObject obj = _gameObjects[_currentObjectIndex];
-            obj.SpriteRenderer.LayerDepth = MathHelper.Clamp(obj.SpriteRenderer.LayerDepth + 0.1f, 0f, 1f);
+            obj.SpriteRenderer.UpdateLayerDepth(MathHelper.Clamp(obj.SpriteRenderer.LayerDepth + 0.1f, 0f, 1f));
         }
 
         else if(pCurrentKeyboardState.IsKeyDown(Keys.Down) && !_previousKeyboardState.IsKeyDown(Keys.Down))
         {
             GameObject obj = _gameObjects[_currentObjectIndex];
-            obj.SpriteRenderer.LayerDepth = MathHelper.Clamp(obj.SpriteRenderer.LayerDepth - 0.1f, 0f, 1f);
+            obj.SpriteRenderer.UpdateLayerDepth(MathHelper.Clamp(obj.SpriteRenderer.LayerDepth - 0.1f, 0f, 1f));
         }
 
     }

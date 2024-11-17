@@ -33,10 +33,7 @@ public class OriginTestScene : SceneBase
         _bottomRightOriginObject = InitializeGameObject(pTexture, new Vector2(600, 200), new Vector2(1, 1), pFont);
 
         // Initialize Text Object.
-        _textObject = new GameObject()
-        {
-            Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 29) }
-        };
+        _textObject = new GameObject(new Vector2(Game1.ScreenWidth / 2, 20));
         _textObject.AddTextRenderer(new TextRenderer(pFont, "Origin Scene", Vector2.Zero, Color.White));
         _textObject.AddTextRenderer(new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes", new Vector2(0, 20), Color.White));
     }
@@ -78,8 +75,7 @@ public class OriginTestScene : SceneBase
     #region Private Voids
     private GameObject InitializeGameObject(Texture2D pTexture, Vector2 pPosition, Vector2 pOrigin, SpriteFont pFont, float pLayerDepth = 0f)
     {
-        GameObject gameObject = new GameObject(pTexture, pLayerDepth);
-        gameObject.Transform.Position = pPosition;
+        GameObject gameObject = new GameObject(pTexture, pPosition, pLayerDepth);
         gameObject.Transform.UpdateOrigin(pOrigin);
         gameObject.AddTextRenderer(new TextRenderer(pFont, $"{gameObject.Transform.Origin}", new Vector2(50, -50), Color.White));
         return gameObject;
