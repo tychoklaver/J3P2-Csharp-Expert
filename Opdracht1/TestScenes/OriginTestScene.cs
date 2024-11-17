@@ -12,6 +12,8 @@ public class OriginTestScene : SceneBase
     private readonly Texture2D _originMarkerTexture;
 
     private readonly GameObject _textObject;
+
+    private float _startRotation = 0f;
     #endregion
 
     #region Constructors
@@ -31,8 +33,10 @@ public class OriginTestScene : SceneBase
         _bottomRightOriginObject = InitializeGameObject(pTexture, new Vector2(600, 200), new Vector2(1, 1), pFont);
 
         // Initialize Text Object.
-        _textObject = new GameObject(null);
-        _textObject.Transform.Position = new Vector2(Game1.ScreenWidth / 2, 20);
+        _textObject = new GameObject()
+        {
+            Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 29) }
+        };
         _textObject.AddTextRenderer(new TextRenderer(pFont, "Origin Scene", Vector2.Zero, Color.White));
         _textObject.AddTextRenderer(new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes", new Vector2(0, 20), Color.White));
     }
@@ -45,10 +49,12 @@ public class OriginTestScene : SceneBase
     /// <param name="pGameTime">The current game time.</param>
     public override void Update(GameTime pGameTime)
     {
+        _startRotation += 1f;
+
         // Updates rotation of the objects.
-        _centerOriginObject.Transform.Rotation += 1f;
-        _topleftOriginObject.Transform.Rotation += 1f;
-        _bottomRightOriginObject.Transform.Rotation += 1f;
+        _centerOriginObject.Transform.UpdateRotation(_startRotation);
+        _topleftOriginObject.Transform.UpdateRotation(_startRotation);
+        _bottomRightOriginObject.Transform.UpdateRotation(_startRotation);
     }
 
     /// <summary>
@@ -74,7 +80,7 @@ public class OriginTestScene : SceneBase
     {
         GameObject gameObject = new GameObject(pTexture, pLayerDepth);
         gameObject.Transform.Position = pPosition;
-        gameObject.Transform.Origin = pOrigin;
+        gameObject.Transform.UpdateOrigin(pOrigin);
         gameObject.AddTextRenderer(new TextRenderer(pFont, $"{gameObject.Transform.Origin}", new Vector2(50, -50), Color.White));
         return gameObject;
     }

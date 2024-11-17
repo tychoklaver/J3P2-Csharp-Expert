@@ -44,14 +44,20 @@ public class LayerDepthTestScene : SceneBase
             obj.AddTextRenderer(new TextRenderer(pFont, $"Layer Depth: {obj.SpriteRenderer.LayerDepth}", new Vector2(20, -40), Color.White));
         }
 
-        _textObject = new GameObject(null)
+        _textObject = new GameObject()
         {
             Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 20) }
         };
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Layer Depth Scene", Vector2.Zero, Color.White));
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes!", new Vector2(0, 20), Color.White));
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Use Up/Down keys to change layer depth of selected object!", new Vector2(0, 40), Color.White));
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Use Left/Right to switch objects!", new Vector2(0, 60), Color.White));
+
+        List<TextRenderer> textRenderers = new List<TextRenderer>()
+        {
+            new TextRenderer(pFont, "Layer Depth Scene", Vector2.Zero, Color.White),
+            new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes!", new Vector2(0, 20), Color.White),
+            new TextRenderer(pFont, "Use Up/Down keys to change layer depth of selected object!", new Vector2(0, 40), Color.White),
+            new TextRenderer(pFont, "Use Left/Right to switch objects!", new Vector2(0, 60), Color.White)
+        };
+
+        _textObject.AddTextRenderer(textRenderers);
 
         _currentObjectIndex = 0;
         _previousKeyboardState = Keyboard.GetState();

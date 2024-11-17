@@ -34,6 +34,16 @@ public class GameObject
         SpriteRenderer = new SpriteRenderer(pTexture, pLayerDepth);
         TextRenderers = new List<TextRenderer>();
     }
+
+    /// <summary>
+    /// Initializes a new GameObject instanc without a SpriteRenderer instance.
+    /// </summary>
+    public GameObject()
+    {
+        Transform = new Transform();
+        SpriteRenderer = null;
+        TextRenderers = new List<TextRenderer>();
+    }
     #endregion
 
     #region Public Voids
@@ -49,7 +59,7 @@ public class GameObject
     /// <param name="pSpriteBatch">The SpriteBatch used to draw the textures.</param>
     public virtual void Draw(SpriteBatch pSpriteBatch)
     {
-        SpriteRenderer.Draw(pSpriteBatch, Transform);
+        SpriteRenderer?.Draw(pSpriteBatch, Transform);
 
         foreach (TextRenderer textRenderer in TextRenderers)
         {
@@ -65,6 +75,19 @@ public class GameObject
     {
         pTextRenderer.Parent = this;
         TextRenderers.Add(pTextRenderer);
+    }
+
+    /// <summary>
+    /// Allows multiple text renderers to be added at once, instead of only one.
+    /// </summary>
+    /// <param name="pTextRenderers">The list of Renderers to add.</param>
+    public void AddTextRenderer(List<TextRenderer> pTextRenderers)
+    {
+        foreach (TextRenderer renderer in pTextRenderers)
+        {
+            renderer.Parent = this;
+            TextRenderers.Add(renderer);
+        }
     }
 
     /// <summary>

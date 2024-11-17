@@ -14,17 +14,17 @@ public class Transform
     /// <summary>
     /// Gets or sets the rotation of the object.
     /// </summary>
-    public float Rotation { get; set; }
+    public float Rotation { get; private set; }
 
     /// <summary>
     /// Gets or sets the scale of the object.
     /// </summary>
-    public Vector2 Scale { get; set; }
+    public Vector2 Scale { get; private set; }
 
     /// <summary>
     /// Gets or sets the origin point of the object (dynamically, relative to its size).
     /// </summary>
-    public Vector2 Origin { get; set; }
+    public Vector2 Origin { get; private set; }
     #endregion
 
     #region Constructors
@@ -38,5 +38,35 @@ public class Transform
         Scale = Vector2.One;
         Origin = new Vector2(0.5f, 0.5f); // Sets Origin to half the size of the Texture. Further logic handled in SpriteRenderer.
     }
+    #endregion
+
+    #region Public Voids
+    /// <summary>
+    /// Updates the rotation of the GameObject.
+    /// </summary>
+    /// <param name="pRotation">The new rotation.</param>
+    public void UpdateRotation(float pRotation) => Rotation = pRotation;
+
+    /// <summary>
+    /// Updates the scale of the GameObject.
+    /// </summary>
+    /// <param name="pScale">The new scale.</param>
+    public void UpdateScale(Vector2 pScale) => Scale = pScale;
+
+    /// <summary>
+    /// Updates the origin of the GameObject.
+    /// </summary>
+    /// <param name="pOrigin">The new origin.</param>
+    public void UpdateOrigin(Vector2 pOrigin) => Origin = pOrigin;
+
+    /// <summary>
+    /// Converts the rotation float to degrees.
+    /// </summary>
+    public float RotationToDegrees() => MathHelper.ToDegrees(Rotation);
+
+    /// <summary>
+    /// Converts the rotation float to radians.
+    /// </summary>
+    public float RotationToRadians() => MathHelper.ToRadians(Rotation);
     #endregion
 }

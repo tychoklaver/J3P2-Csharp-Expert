@@ -27,13 +27,19 @@ public class ScaleTestScene : SceneBase
         InitializeGameObject(pTexture, new Vector2(1.3f, 1.3f), pFont, 3);
         InitializeGameObject(pTexture, new Vector2(3.0f, 1.4f), pFont, 4);
 
-        _textObject = new GameObject(null)
+        _textObject = new GameObject()
         {
             Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 20) }
         };
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Scale Scene", Vector2.Zero, Color.White));
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes!", new Vector2(0, 20), Color.White));
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Use the Arrow Keys to switch between object!", new Vector2(0, 40), Color.White));
+
+        List<TextRenderer> renderers = new List<TextRenderer>()
+        {
+            new TextRenderer(pFont, "Scale Scene", Vector2.Zero, Color.White),
+            new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes!", new Vector2(0, 20), Color.White),
+            new TextRenderer(pFont, "Use the Arrow Keys to switch between object!", new Vector2(0, 40), Color.White)
+        };
+
+        _textObject.AddTextRenderer(renderers);
 
         _currentObjectIndex = 0;
         _previousKeyboardState = Keyboard.GetState();
@@ -66,7 +72,7 @@ public class ScaleTestScene : SceneBase
     {
         _gameObjects[pIndex] = new GameObject(pTexture);
         _gameObjects[pIndex].Transform.Position = new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2);
-        _gameObjects[pIndex].Transform.Scale = pScale;
+        _gameObjects[pIndex].Transform.UpdateScale(pScale);
         _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Scale}", new Vector2(50, -50), Color.White));
     }
 

@@ -1,4 +1,5 @@
-﻿global using Microsoft.Xna.Framework;
+﻿#region Global Usings
+global using Microsoft.Xna.Framework;
 global using Microsoft.Xna.Framework.Graphics;
 global using Microsoft.Xna.Framework.Input;
 global using J3P2_Csharp_Expert.Opdracht1.TestScenes;
@@ -6,6 +7,7 @@ global using J3P2_Csharp_Expert.Opdracht1.BaseClasses;
 global using System;
 global using System.Collections.Generic;
 global using System.Linq;
+#endregion
 
 namespace J3P2_Csharp_Expert.Opdracht1;
 

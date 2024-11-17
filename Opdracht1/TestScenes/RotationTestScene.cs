@@ -21,18 +21,24 @@ public class RotationTestScene : SceneBase
     public RotationTestScene(Texture2D pTexture, SpriteFont pFont)
     {
         _gameObjects = new GameObject[4];
-        InitiaizeGameObject(pTexture, 0f, pFont, 0);
-        InitiaizeGameObject(pTexture, 90f, pFont, 1);
-        InitiaizeGameObject(pTexture, 180f, pFont, 2);
-        InitiaizeGameObject(pTexture, 270f, pFont, 3);
+        InitializeGameObject(pTexture, 0f, pFont, 0);
+        InitializeGameObject(pTexture, 90f, pFont, 1);
+        InitializeGameObject(pTexture, 180f, pFont, 2);
+        InitializeGameObject(pTexture, 270f, pFont, 3);
 
-        _textObject = new GameObject(null)
+        _textObject = new GameObject()
         {
             Transform = { Position = new Vector2(Game1.ScreenWidth / 2, 20) }
         };
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Rotation Scene", Vector2.Zero, Color.White));
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes!", new Vector2(0, 20), Color.White));
-        _textObject.AddTextRenderer(new TextRenderer(pFont, "Use the Arrow Keys to switch between object!", new Vector2(0, 40), Color.White));
+
+        List<TextRenderer> renderers = new List<TextRenderer>()
+        {
+            new TextRenderer(pFont, "Rotation Scene", Vector2.Zero, Color.White),
+            new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes!", new Vector2(0, 20), Color.White),
+            new TextRenderer(pFont, "Use the Arrow Keys to switch between object!", new Vector2(0, 40), Color.White)
+        };
+
+        _textObject.AddTextRenderer(renderers);
 
         _currentObjectIndex = 0;
         _previousKeyboardState = Keyboard.GetState();
@@ -61,11 +67,11 @@ public class RotationTestScene : SceneBase
     #endregion
 
     #region Private Voids
-    private void InitiaizeGameObject(Texture2D pTexture, float pRotation, SpriteFont pFont, int pIndex)
+    private void InitializeGameObject(Texture2D pTexture, float pRotation, SpriteFont pFont, int pIndex)
     {
         _gameObjects[pIndex] = new GameObject(pTexture);
         _gameObjects[pIndex].Transform.Position = new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2);
-        _gameObjects[pIndex].Transform.Rotation = pRotation;
+        _gameObjects[pIndex].Transform.UpdateRotation(pRotation);
         _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Rotation}", new Vector2(50, -50), Color.White));
     }
 

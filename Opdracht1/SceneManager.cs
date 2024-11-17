@@ -70,6 +70,5 @@ public class SceneManager
         if (_scenes.ContainsKey(pKey))
             _currentScene = _scenes[pKey];
     }
-
     #endregion
 }
