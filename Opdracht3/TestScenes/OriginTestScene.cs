@@ -1,6 +1,6 @@
-﻿using J3P2_Csharp_Expert.Opdracht1.BaseClasses;
+﻿using J3P2_Csharp_Expert.Opdracht3.BaseClasses;
 
-namespace J3P2_Csharp_Expert.Opdracht1.TestScenes;
+namespace J3P2_Csharp_Expert.Opdracht3.TestScenes;
 
 /// <summary>
 /// A scene in which the object's origin gets tested using rotation. Derives from SceneBase.

@@ -1,14 +1,9 @@
 ﻿#region Global Usings
-global using Microsoft.Xna.Framework;
-global using Microsoft.Xna.Framework.Graphics;
-global using Microsoft.Xna.Framework.Input;
-global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-using J3P2_Csharp_Expert.Opdracht1.TestScenes;
+using J3P2_Csharp_Expert.Opdracht2.ObjectTestScenes;
+using J3P2_Csharp_Expert.Opdracht2.TestScenes;
 #endregion
 
-namespace J3P2_Csharp_Expert.Opdracht1;
+namespace J3P2_Csharp_Expert.Opdracht2;
 
 /// <summary>
 /// Game1 Class.
@@ -18,11 +13,10 @@ public class Game1 : Game
     #region Fields
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private RotationTestScene _rotationTestScene;
-    private PositionTestScene _positionTestScene;
-    private ScaleTestScene _scaleTestScene;
-    private OriginTestScene _originTestScene;
-    private LayerDepthTestScene _layerDepthScene;
+    private RotaterObjectTestScene _rotaterObjectTestScene;
+    private BouncerObjectTestScene _bouncerObjectTestScene;
+    private ScalerObjectTestScene _scalerObjectTestScene;
+    private SineRotaterTestScene _sineRotationTestScene;
     private Texture2D _texture;
     private SceneManager _sceneManager;
     #endregion
@@ -66,17 +60,15 @@ public class Game1 : Game
         _texture = Content.Load<Texture2D>("Textures/LittleStar");
 
         _sceneManager = new SceneManager();
-        _rotationTestScene = new RotationTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
-        _positionTestScene = new PositionTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
-        _scaleTestScene = new ScaleTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
-        _originTestScene = new OriginTestScene(_texture, Content.Load<Texture2D>("Textures/DebugTexture"), Content.Load<SpriteFont>("Fonts/Font"));
-        _layerDepthScene = new LayerDepthTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
+        _rotaterObjectTestScene = new RotaterObjectTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
+        _bouncerObjectTestScene = new BouncerObjectTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
+        _sineRotationTestScene = new SineRotaterTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
+        _scalerObjectTestScene = new ScalerObjectTestScene(_texture, Content.Load<SpriteFont>("Fonts/Font"));
 
-        _sceneManager.AddScene(1, _rotationTestScene);
-        _sceneManager.AddScene(2, _positionTestScene);
-        _sceneManager.AddScene(3, _originTestScene);
-        _sceneManager.AddScene(4, _scaleTestScene);
-        _sceneManager.AddScene(5, _layerDepthScene);
+        _sceneManager.AddScene(1, _rotaterObjectTestScene);
+        _sceneManager.AddScene(2, _bouncerObjectTestScene);
+        _sceneManager.AddScene(3, _sineRotationTestScene);
+        _sceneManager.AddScene(4, _scalerObjectTestScene);
 
         _sceneManager.SetCurrentScene(1);
     }

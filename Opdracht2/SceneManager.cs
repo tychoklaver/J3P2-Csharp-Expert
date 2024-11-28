@@ -1,6 +1,6 @@
-﻿using J3P2_Csharp_Expert.Opdracht1.BaseClasses;
+﻿using J3P2_Csharp_Expert.Opdracht2.BaseClasses;
 
-namespace J3P2_Csharp_Expert.Opdracht1;
+namespace J3P2_Csharp_Expert.Opdracht2;
 
 /// <summary>
 /// The SceneManager class, which stores all game scenes and allows switching between them.

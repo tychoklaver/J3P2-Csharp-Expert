@@ -1,4 +1,6 @@
-﻿namespace J3P2_Csharp_Expert.Opdracht1.TestScenes;
+﻿using J3P2_Csharp_Expert.Opdracht1.BaseClasses;
+
+namespace J3P2_Csharp_Expert.Opdracht1.TestScenes;
 
 /// <summary>
 /// A scene in which the object's scale gets tested. Derives from SceneBase.

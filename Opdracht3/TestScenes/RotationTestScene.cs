@@ -1,6 +1,7 @@
-﻿using J3P2_Csharp_Expert.Opdracht1.BaseClasses;
+﻿using J3P2_Csharp_Expert.Opdracht3.BaseClasses;
+using J3P2_Csharp_Expert.Opdracht3.GameObjects;
 
-namespace J3P2_Csharp_Expert.Opdracht1.TestScenes;
+namespace J3P2_Csharp_Expert.Opdracht3.TestScenes;
 
 /// <summary>
 /// A scene in which the object's rotation gets tested. Derives from SceneBase.
@@ -23,10 +24,10 @@ public class RotationTestScene : SceneBase
     public RotationTestScene(Texture2D pTexture, SpriteFont pFont)
     {
         _gameObjects = new GameObject[4];
-        InitializeGameObject(pTexture, 0f, pFont, 0);
-        InitializeGameObject(pTexture, 90f, pFont, 1);
-        InitializeGameObject(pTexture, 180f, pFont, 2);
-        InitializeGameObject(pTexture, 270f, pFont, 3);
+        InitializeGameObject(pTexture, new Vector2(0 + pTexture.Width, 0 + pTexture.Height), 0f, pFont, 0, 1f, false);
+        InitializeGameObject(pTexture, new Vector2(Game1.ScreenWidth - pTexture.Width, 0 + pTexture.Height), 90f, pFont, 1, 2f, true);
+        InitializeGameObject(pTexture, new Vector2(0 + pTexture.Width, Game1.ScreenHeight - pTexture.Height), 180f, pFont, 2, 1f, true);
+        InitializeGameObject(pTexture, new Vector2(Game1.ScreenWidth - pTexture.Width, Game1.ScreenHeight - pTexture.Height), 270f, pFont, 3, 2f, false);
 
         _textObject = new GameObject(new Vector2(Game1.ScreenWidth / 2, 20));
 
@@ -52,6 +53,21 @@ public class RotationTestScene : SceneBase
     public override void Update(GameTime pGameTime)
     {
         HandleInput();
+        float deltaSeconds = (float)pGameTime.ElapsedGameTime.TotalSeconds;
+        for (int i = 0; i < _gameObjects.Length; i++)
+        {
+            float previousRotation = _gameObjects[i].Transform.Rotation;
+
+            _gameObjects[i].Update(pGameTime);
+            
+            float currentRotation = _gameObjects[i].Transform.Rotation;
+            float rotationDelta = currentRotation - previousRotation;
+
+            int displayedRotation = ((int)currentRotation % 360 + 360) % 360;
+
+            float rotationsPerSecond = Math.Abs(rotationDelta / 360f) / deltaSeconds;
+            _gameObjects[i].TextRenderers.ForEach(j => j.UpdateText($"Rotation: {displayedRotation} | RPS: {rotationsPerSecond:F2}"));
+        }
     }
 
     /// <summary>
@@ -60,16 +76,17 @@ public class RotationTestScene : SceneBase
     /// <param name="pSpriteBatch">The SpriteBatch used for drawing.</param>
     public override void Draw(SpriteBatch pSpriteBatch)
     {
-        _gameObjects[_currentObjectIndex].Draw(pSpriteBatch);
-        _textObject.Draw(pSpriteBatch);
+        for (int i = 0; i < _gameObjects.Length; i++)
+        {
+            _gameObjects[i].Draw(pSpriteBatch);
+        }
     }
     #endregion
 
     #region Private Voids
-    private void InitializeGameObject(Texture2D pTexture, float pRotation, SpriteFont pFont, int pIndex)
+    private void InitializeGameObject(Texture2D pTexture, Vector2 pPosition, float pRotation, SpriteFont pFont, int pIndex, float pRotationSpeed, bool pIsClockwise)
     {
-        _gameObjects[pIndex] = new GameObject(pTexture, new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2));
-        _gameObjects[pIndex].Transform.UpdateRotation(pRotation);
+        _gameObjects[pIndex] = new RotaterObject(pTexture, pPosition, pRotationSpeed, pIsClockwise);
         _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Rotation}", new Vector2(50, -50), Color.White));
     }
 

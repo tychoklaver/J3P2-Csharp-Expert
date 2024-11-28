@@ -1,11 +1,11 @@
-﻿using J3P2_Csharp_Expert.Opdracht1.BaseClasses;
+﻿using J3P2_Csharp_Expert.Opdracht3.BaseClasses;
 
-namespace J3P2_Csharp_Expert.Opdracht1.TestScenes;
+namespace J3P2_Csharp_Expert.Opdracht3.TestScenes;
 
 /// <summary>
-/// A scene in which the object's positioning gets tested. Derives from SceneBase.
+/// A scene in which the object's scale gets tested. Derives from SceneBase.
 /// </summary>
-public class PositionTestScene : SceneBase
+public class ScaleTestScene : SceneBase
 {
     #region Fields
     private readonly GameObject[] _gameObjects;
@@ -16,24 +16,24 @@ public class PositionTestScene : SceneBase
 
     #region Constructors
     /// <summary>
-    /// Initializes a new instance of the Position Test Scene.
+    /// Initializes a new instance of the Scale Test Scene.
     /// </summary>
     /// <param name="pTexture">The texture of the GameObject.</param>
     /// <param name="pFont">The font for the text.</param>
-    public PositionTestScene(Texture2D pTexture, SpriteFont pFont)
+    public ScaleTestScene(Texture2D pTexture, SpriteFont pFont)
     {
         _gameObjects = new GameObject[5];
-        InitializeGameObject(pTexture, new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2), pFont, 0);
-        InitializeGameObject(pTexture, new Vector2(300, 100), pFont, 1);
-        InitializeGameObject(pTexture, new Vector2(600, 300), pFont, 2);
-        InitializeGameObject(pTexture, new Vector2(400, 400), pFont, 3);
-        InitializeGameObject(pTexture, new Vector2(80, 310), pFont, 4);
+        InitializeGameObject(pTexture, new Vector2(1.0f, 1.0f), pFont, 0);
+        InitializeGameObject(pTexture, new Vector2(1.1f, 1.1f), pFont, 1);
+        InitializeGameObject(pTexture, new Vector2(1.2f, 1.2f), pFont, 2);
+        InitializeGameObject(pTexture, new Vector2(1.3f, 1.3f), pFont, 3);
+        InitializeGameObject(pTexture, new Vector2(3.0f, 1.4f), pFont, 4);
 
         _textObject = new GameObject(new Vector2(Game1.ScreenWidth / 2, 20));
 
         List<TextRenderer> renderers = new List<TextRenderer>()
         {
-            new TextRenderer(pFont, "Position Scene", Vector2.Zero, Color.White),
+            new TextRenderer(pFont, "Scale Scene", Vector2.Zero, Color.White),
             new TextRenderer(pFont, "Use Numbers 1-5 to switch between scenes!", new Vector2(0, 20), Color.White),
             new TextRenderer(pFont, "Use the Arrow Keys to switch between object!", new Vector2(0, 40), Color.White)
         };
@@ -67,10 +67,11 @@ public class PositionTestScene : SceneBase
     #endregion
 
     #region Private Voids
-    private void InitializeGameObject(Texture2D pTexture, Vector2 pPosition, SpriteFont pFont, int pIndex)
+    private void InitializeGameObject(Texture2D pTexture, Vector2 pScale, SpriteFont pFont, int pIndex)
     {
-        _gameObjects[pIndex] = new GameObject(pTexture, pPosition);
-        _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Position}", new Vector2(50, -50), Color.White));
+        _gameObjects[pIndex] = new GameObject(pTexture, new Vector2(Game1.ScreenWidth / 2, Game1.ScreenHeight / 2));
+        _gameObjects[pIndex].Transform.UpdateScale(pScale);
+        _gameObjects[pIndex].AddTextRenderer(new TextRenderer(pFont, $"{_gameObjects[pIndex].Transform.Scale}", new Vector2(50, -50), Color.White));
     }
 
     private void HandleInput()

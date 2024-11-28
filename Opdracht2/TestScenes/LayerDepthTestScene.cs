@@ -1,7 +1,6 @@
-﻿using J3P2_Csharp_Expert.Opdracht1.BaseClasses;
+﻿using J3P2_Csharp_Expert.Opdracht2.BaseClasses;
 
-
-namespace J3P2_Csharp_Expert.Opdracht1.TestScenes;
+namespace J3P2_Csharp_Expert.Opdracht2.TestScenes;
 
 /// <summary>
 /// Scene which tests the object's layer depth. Derives from SceneBase.
